@@ -30,5 +30,10 @@ in {
 
   spago = {
     v0_9_0_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.9.0.0/pkgs.nix);
+    v0_8_5_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.8.5.0/pkgs.nix);
+    v0_8_4_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.8.4.0/pkgs.nix);
+    v0_8_3_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.8.3.0/pkgs.nix);
+    v0_8_1_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.8.1.0/pkgs.nix);
+    v0_8_0_0 = exe "spago" "spago" (mkStackPkgSet ./spago/0.8.0.0/pkgs.nix);
   };
 }

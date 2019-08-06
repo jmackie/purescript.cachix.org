@@ -3,8 +3,14 @@ set -euo pipefail
 set -x
 IFS=$'\n\t'
 
+# https://github.com/spacchetti/spago/releases
 declare -a versions=(
   "0.9.0.0"
+  "0.8.5.0"
+  "0.8.4.0"
+  "0.8.3.0"
+  "0.8.1.0"
+  "0.8.0.0"
 )
 
 function fill() {
