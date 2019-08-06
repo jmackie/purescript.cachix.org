@@ -21,8 +21,8 @@ script:
   - nix-env -iA cachix -f https://cachix.org/api/v1/install
   - cachix use purescript
   - '[ -n "$CACHIX_SIGNING_KEY" ] && cachix push purescript --watch-store > cachix-push.log 2>&1 &'
-  - nix-build -j2 ./default.nix $TARGET
-  #            ^^
+  - nix-build ./default.nix -j2 -A $TARGET
+  #                          ^^
   # https://docs.travis-ci.com/user/reference/overview/
 
   - sleep 10 # allow cachix finish uploading
