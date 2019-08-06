@@ -20,6 +20,6 @@ script:
   - nix-env -iA cachix -f https://cachix.org/api/v1/install
   - nix-env -iA cachix -f https://cachix.org/api/v1/install
   - cachix use purescript
-  - if [ -n "$CACHIX_SIGNING_KEY" ]; then cachix push jmackie --watch-store; fi &
+  - if [ -n "$CACHIX_SIGNING_KEY" ]; then cachix push jmackie --watch-store; else echo Missing signing key; fi &
   - nix-build . -A $TARGET
   - sleep 10 # to allow cachix finish uploading
