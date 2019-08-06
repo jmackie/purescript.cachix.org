@@ -2,6 +2,7 @@
 # https://raw.githubusercontent.com/entropia/tip-toi-reveng/master/.travis.yml
 #
 # Other references:
+# https://nixos.wiki/wiki/Nix_on_Travis
 # https://github.com/input-output-hk/cardano-sl/blob/master/docs/nix.md#binary-cache
 
 language: nix
@@ -10,6 +11,10 @@ nix: 2.2.2
 jobs:
   include:
     - env: TARGET=spago.v0_9_0_0
+
+ cache:
+    directories:
+     - /nix/store/
 
 install:
 - sudo mkdir -p /etc/nix
