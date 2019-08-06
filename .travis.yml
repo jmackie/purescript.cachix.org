@@ -12,19 +12,18 @@ jobs:
   include:
     - env: TARGET=spago.v0_9_0_0
 
- cache:
-    directories:
-     - /nix/store/
-
 install:
-- sudo mkdir -p /etc/nix
-- echo "binary-caches = https://cache.nixos.org https://hydra.iohk.io https://cache.dhall-lang.org" | sudo tee -a /etc/nix/nix.conf > /dev/null
-- echo "binary-cache-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.dhall-lang.org:I9/H18WHd60olG5GsIjolp7CtepSgJmM2CsO813VTmM=" | sudo tee -a /etc/nix/nix.conf > /dev/null
+  - sudo mkdir -p /etc/nix
+  - echo "binary-caches = https://cache.nixos.org https://hydra.iohk.io https://cache.dhall-lang.org" | sudo tee -a /etc/nix/nix.conf > /dev/null
+  - echo "binary-cache-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.dhall-lang.org:I9/H18WHd60olG5GsIjolp7CtepSgJmM2CsO813VTmM=" | sudo tee -a /etc/nix/nix.conf > /dev/null
 
 script:
   - nix-env -iA cachix -f https://cachix.org/api/v1/install
   - nix-env -iA cachix -f https://cachix.org/api/v1/install
   - cachix use purescript
-  - if [ -n "$CACHIX_SIGNING_KEY" ]; then cachix push jmackie --watch-store; else echo Missing signing key; fi &
+  - '[ -n "$CACHIX_SIGNING_KEY" ] && cachix push purescript --watch-store > cachix-push.log 2>&1 &'
   - nix-build . -A $TARGET
-  - sleep 10 # to allow cachix finish uploading
+  - sleep 10 # allow cachix finish uploading
+
+after_script:
+  - cat cachix-push.log
