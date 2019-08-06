@@ -1,0 +1,25 @@
+# Based on
+# https://raw.githubusercontent.com/entropia/tip-toi-reveng/master/.travis.yml
+#
+# Other references:
+# https://github.com/input-output-hk/cardano-sl/blob/master/docs/nix.md#binary-cache
+
+language: nix
+nix: 2.2.2
+
+jobs:
+  include:
+    - env: TARGET=spago.v0_9_0_0
+
+install:
+- sudo mkdir -p /etc/nix
+- echo "binary-caches = https://cache.nixos.org hydra.iohk.io" | sudo tee -a /etc/nix/nix.conf > /dev/null
+- echo "binary-cache-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" | sudo tee -a /etc/nix/nix.conf > /dev/null
+
+script:
+  - nix-env -iA cachix -f https://cachix.org/api/v1/install
+  - nix-env -iA cachix -f https://cachix.org/api/v1/install
+  - cachix use purescript
+  - if [ -n "$CACHIX_SIGNING_KEY" ]; then cachix push jmackie --watch-store; fi &
+  - nix-build . -A $TARGET
+  - sleep 10 # to allow cachix finish uploading
