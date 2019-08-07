@@ -51,4 +51,3 @@ in {
         spagoExe (mkStackPkgSet (patchSpago (import ./spago/0.8.0.0/pkgs.nix)));
     };
 }
-

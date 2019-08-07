@@ -18,6 +18,14 @@ function build_target() {
 }
 
 case "$1" in
+"purs")
+  if git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|purs/.*\.nix$'; then
+    build_target purs.v0_13_2 # FIXME
+  else
+    echo 'Nothing to do'
+    exit 0
+  fi
+  ;;
 "spago")
   if git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|spago/.*\.nix$'; then
     build_target spago

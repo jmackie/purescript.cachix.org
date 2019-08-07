@@ -11,6 +11,7 @@ nix: 2.2.2
 jobs:
   include:
     - env: TARGET=spago
+    - env: TARGET=purs
 
 install:
   - sudo mkdir -p /etc/nix
