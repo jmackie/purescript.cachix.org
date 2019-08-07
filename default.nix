@@ -8,8 +8,11 @@ let
 
   pkgs = import (fetchPin "nixpkgs" ./nixpkgs-src.json) { };
 
-  haskell =
-    import (fetchPin "haskell-nix" ./haskell-nix-src.json) { inherit pkgs; };
+  haskell = import (fetchPin "haskell-nix" ./haskell-nix-src.json) {
+    inherit pkgs;
+    hackageSourceJSON = ./hackage-src.json;
+    stackageSourceJSON = ./stackage-src.json;
+  };
 
   patchSpago = import ./spago/patch.nix { inherit pkgs; };
 
