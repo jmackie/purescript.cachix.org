@@ -16,11 +16,16 @@ function build_target() {
 
 case "$1" in
 "spago")
-  git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|spago/.*\.nix$' && build spago
+  if git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|spago/.*\.nix$'; then
+    build spago
+  else
+    echo 'Nothing to do'
+    exit 0
+  fi
   ;;
 
 "")
-  echo missing target executable argument
+  echo 'missing target executable argument'
   echo 'usage: .travis.sh [EXE]'
   exit 1
   ;;
