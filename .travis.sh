@@ -17,7 +17,7 @@ function build_target() {
 case "$1" in
 "spago")
   if git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|spago/.*\.nix$'; then
-    build spago
+    build_target spago
   else
     echo 'Nothing to do'
     exit 0
