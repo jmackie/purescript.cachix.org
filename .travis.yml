@@ -16,16 +16,7 @@ install:
   - sudo mkdir -p /etc/nix
   - echo "binary-caches = https://cache.nixos.org https://hydra.iohk.io https://cache.dhall-lang.org" | sudo tee -a /etc/nix/nix.conf > /dev/null
   - echo "binary-cache-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.dhall-lang.org:I9/H18WHd60olG5GsIjolp7CtepSgJmM2CsO813VTmM=" | sudo tee -a /etc/nix/nix.conf > /dev/null
+  - nix-env -iA cachix -f https://cachix.org/api/v1/install
 
 script:
-  - nix-env -iA cachix -f https://cachix.org/api/v1/install
-  - cachix use purescript
-  - '[ -n "$CACHIX_SIGNING_KEY" ] && cachix push purescript --watch-store > cachix-push.log 2>&1 &'
-  - nix-build ./default.nix -j2 -A $TARGET
-  #                          ^^
-  # https://docs.travis-ci.com/user/reference/overview/
-
-  - sleep 10 # allow cachix finish uploading
-
-after_script:
-  - cat cachix-push.log
+  - ./.travis.sh $TARGET
