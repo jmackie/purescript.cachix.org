@@ -10,7 +10,7 @@ nix: 2.2.2
 
 jobs:
   include:
-    - env: TARGET=spago.v0_9_0_0
+    - env: TARGET=spago
 
 install:
   - sudo mkdir -p /etc/nix
