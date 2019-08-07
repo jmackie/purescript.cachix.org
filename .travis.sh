@@ -16,7 +16,7 @@ function build_target() {
 
 case "$1" in
 "spago")
-  git diff-tree --no-commit-id --name-only -r HEAD | grep -E 'default.nix$|spago/.*\.nix$' && build spago
+  git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|spago/.*\.nix$' && build spago
   ;;
 
 "")
