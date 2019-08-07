@@ -5,7 +5,10 @@ IFS=$'\n\t'
 
 function build_target() {
   cachix use purescript
+  # Fail if the signing key isn't defined, cos the whole point of this build
+  # is to hydrate the cache
   [ -n "$CACHIX_SIGNING_KEY" ] && cachix push purescript --watch-store >cachix-push.log 2>&1 &
+
   nix-build ./default.nix -j2 -A "$1"
   #                        ^^
   # https://docs.travis-ci.com/user/reference/overview/
