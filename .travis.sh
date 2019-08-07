@@ -9,9 +9,7 @@ function build_target() {
   # is to hydrate the cache
   [ -n "$CACHIX_SIGNING_KEY" ] && cachix push purescript --watch-store >cachix-push.log 2>&1 &
 
-  nix-build ./default.nix -j2 -A "$1"
-  #                        ^^
-  # https://docs.travis-ci.com/user/reference/overview/
+  nix-build ./default.nix -j auto -A "$1"
 
   sleep 10 # allow cachix finish uploading
   cat cachix-push.log

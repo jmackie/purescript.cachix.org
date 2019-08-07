@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# TODO: use a nix-shell shebang to make sure all the dependencies are present
+
 set -euo pipefail
 set -x
 IFS=$'\n\t'
