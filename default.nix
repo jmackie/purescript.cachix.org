@@ -32,7 +32,7 @@ let
   mkPurtyPkgSet = mkStackPkgSet [
     # https://stackoverflow.com/questions/53546699/building-contravariant-using-stack-leads-to-constraint-error-about-not-being-abl
     # https://hub.darcs.net/ross/transformers/patch/b00658faa4578b0eb578cf158c75185c1c0ec697
-    (hackage: { transformers = hackage.hsc2hs."0.5.6.2".revisions.default; })
+    (hackage: { transformers = hackage.transformers."0.5.6.2".revisions.default; })
   ];
 
   exe = package: name: pkgSet:
