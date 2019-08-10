@@ -51,7 +51,7 @@
   src = with builtins.fromJSON (builtins.readFile ./purty-src.json);
     builtins.fetchTarball {
       name = "purty-4.5.0";
-      url = "${url}/archive/${rev}.tar.gz";
+      url = "${url}/-/archive/${rev}.tar.gz";
       inherit sha256;
     };
 }) // {

@@ -20,7 +20,7 @@ function fill() {
   src = with builtins.fromJSON (builtins.readFile ./purty-src.json); \
     builtins.fetchTarball { \
     name = \"purty-$v\"; \
-    url = \"\${url}/archive/\${rev}.tar.gz\"; \
+    url = \"\${url}/-/archive/\${rev}.tar.gz\"; \
     inherit sha256; };"
   sed -i "s/^  src.*/$(echo "$src" | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/g" purty.nix
   nixfmt ./*.nix
