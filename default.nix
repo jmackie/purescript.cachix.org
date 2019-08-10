@@ -50,4 +50,10 @@ in {
       v0_8_0_0 =
         spagoExe (mkStackPkgSet (patchSpago (import ./spago/0.8.0.0/pkgs.nix)));
     };
+
+  purty = let purtyExe = exe "purty" "purty";
+    in {
+      v4_5_1 = purtyExe (mkStackPkgSet (import ./purty/4.5.1/pkgs.nix));
+      v4_5_0 = purtyExe (mkStackPkgSet (import ./purty/4.5.0/pkgs.nix));
+    };
 }

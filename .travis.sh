@@ -32,6 +32,14 @@ case "$1" in
     exit 0
   fi
   ;;
+"purty")
+  if git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep -E 'default.nix$|purty/.*\.nix$'; then
+    build_target purty
+  else
+    echo 'Nothing to do'
+    exit 0
+  fi
+  ;;
 
 "")
   echo 'missing target executable argument'

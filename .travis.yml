@@ -12,6 +12,7 @@ jobs:
   include:
     - env: TARGET=spago
     - env: TARGET=purs
+    - env: TARGET=purty
 
 install:
   - sudo mkdir -p /etc/nix
